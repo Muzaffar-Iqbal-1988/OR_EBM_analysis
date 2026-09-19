@@ -1,0 +1,3 @@
+-r requirements.txt
+# Optional neural-network dependencies.
+tensorflow>=2.16

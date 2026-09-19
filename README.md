@@ -3,7 +3,7 @@
 Python workflow for project-success regression, benchmark comparison, and interpretable readiness analysis.
 ## Dataset
 
-Place the authorized analytical CSV at `data/readiness.csv`. The target is `Var_Project_Success` and the four readiness variables are `Fac_Facility_Readiness`, `Fac_People_Readiness`, `Fac_Tech_redainess`, and `Fac_Organiz_Readiness`. Optional control inputs are `Gender`, `Airport`, `Job`, `Organizational_tenure`, `Organization_type`, and `Airport_projects`.
+Place the authorized analytical CSV at `data/Readiness.csv`. The target is `Var_Project_Success` and the four readiness variables are `Fac_Facility_Readiness`, `Fac_People_Readiness`, `Fac_Tech_redainess`, and `Fac_Organiz_Readiness`. Optional control inputs are `Gender`, `Airport`, `Job`, `Organizational_tenure`, `Organization_type`, and `Airport_projects`.
 
 The analysis reads the four readiness score columns directly. Project-success item scores (`PS1`–`PS14`) and `Var_Oper_Readiness` are excluded from the predictor set. Input datasets are kept separately from the repository.
 
@@ -22,7 +22,7 @@ For the classical and explainable models without TensorFlow, install `requiremen
 ## Run
 
 ```bash
-python OR_EBM_complete_analysis.py --data data/readiness.csv --out outputs --strict
+python OR_EBM_complete_analysis.py --data data/Readiness.csv --out outputs --strict
 ```
 
 The default configuration uses a random 70:30 development/holdout split, followed by 5-fold cross-validation repeated 3 times on development data. Preprocessing, feature selection, stacking, and tuning are fitted within their training folds. Models are fitted on the development partition and evaluated on the separate holdout partition. The expected partition sizes are 443 and 190 for a 633-row input.
@@ -31,13 +31,13 @@ Other options:
 
 ```bash
 # Run the core models without TensorFlow
-python OR_EBM_complete_analysis.py --data data/readiness.csv --out outputs --skip-autoencoder
+python OR_EBM_complete_analysis.py --data data/Readiness.csv --out outputs --skip-autoencoder
 
 # Add separate item-level analysis
-python OR_EBM_complete_analysis.py --data data/readiness.csv --out outputs --item-analysis
+python OR_EBM_complete_analysis.py --data data/Readiness.csv --out outputs --item-analysis
 
 # Short execution for checking the software environment
-python OR_EBM_complete_analysis.py --data data/readiness.csv --out smoke --quick --skip-autoencoder --skip-readi-stack
+python OR_EBM_complete_analysis.py --data data/Readiness.csv --out smoke --quick --skip-autoencoder --skip-readi-stack
 ```
 
 `--quick`, `--models`, and `--skip-*` restrict the execution and consequently the set of generated results.

@@ -68,8 +68,6 @@ For each of the `--reps` bootstrap resamples (drawn with replacement) the readin
 
 ## Diagnostics: density check and saturation-cutoff sensitivity
 
-Two reviewer diagnostics reuse the fitted interpretation OR-EBM:
-
 ```bash
 python density_and_sensitivity.py --data data/Readiness.csv --out outputs
 ```

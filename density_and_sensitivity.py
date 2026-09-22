@@ -1,24 +1,3 @@
-"""Factor-score density check and saturation-cutoff sensitivity for OR-EBM.
-
-Two reviewer diagnostics that reuse the study's own functions:
-
-1. Saturation-cutoff sensitivity: the saturation rule is re-applied to the fitted
-   OR-EBM contribution curves at cut-offs of 0.05, 0.10 and 0.15 (the threshold
-   rule is unchanged), to show that the saturation results do not depend on the
-   0.10 operationalisation.
-
-2. Factor-score density check: the distribution of the analytical sample is
-   examined for each of the four readiness scores, with the OR-EBM-derived
-   threshold and saturation points located within each distribution and the
-   number of observations surrounding each point counted, to show that the
-   reported nonlinear shifts do not merely coincide with sparse regions.
-
-The interpretation OR-EBM is fitted on the full analytical sample with the same
-configuration as OR_EBM_complete_analysis.py (interactions=6, random_state=42).
-
-Usage:
-    python density_and_sensitivity.py --data data/Readiness.csv --out outputs
-"""
 from __future__ import annotations
 import argparse
 from pathlib import Path

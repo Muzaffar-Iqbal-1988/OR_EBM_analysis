@@ -845,7 +845,15 @@ def main(argv=None):
         cv_sum, hold_sum, folds, trained = fit_validate(
             name, estimator, x_dev[MAIN], y_dev, x_hold[MAIN], y_hold, cv, len(MAIN), tables)
         cv_rows.append(cv_sum); hold_rows.append(hold_sum); fold_rows.append(folds)
-        curves_and_thresholds(trained, x_dev[MAIN], figures, tables)
+        # The 70:30 split above validates predictive performance of the
+        # readiness-only OR-EBM. The interpretation outputs (contribution curves,
+        # thresholds, saturation points, global importance and interactions),
+        # however, are intended to describe the fitted relationships across the
+        # whole analytical sample, so a dedicated interpretation model is fitted
+        # on all rows and used for curve and threshold/saturation extraction.
+        interpretation = EBM(interactions=6, random_state=SEED, n_jobs=1)
+        interpretation.fit(x[MAIN], y)
+        curves_and_thresholds(interpretation, x[MAIN], figures, tables)
         if args.item_analysis:
             supplementary_items(data.loc[x_dev.index], y_dev, figures, tables)
     elif args.item_analysis:

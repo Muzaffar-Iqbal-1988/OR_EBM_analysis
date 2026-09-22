@@ -46,6 +46,8 @@ python OR_EBM_complete_analysis.py --data data/Readiness.csv --out smoke --quick
 
 Eleven comparator configurations are available: MLR, polynomial regression, SVR, KNN, random forest, XGBoost, MLP, Gaussian process regression, conventional stacking, READI-Stack, and Autoencoder_ANN. A control-adjusted OR-EBM is included in the benchmark comparison. A distinct, four-readiness OR-EBM is fitted for its own evaluation and for interpretation.
 
+The predictive performance of the four-readiness OR-EBM is validated on the 70:30 development/holdout split. The interpretation outputs (contribution curves, thresholds, saturation points, global importance, and interactions) are estimated from the four-readiness OR-EBM fitted on the full analytical sample, because these describe the fitted relationships across all observations rather than out-of-sample prediction.
+
 READI-Stack uses Ridge, RBF-SVR, gradient boosting, and Bayesian Ridge base estimators; a Ridge meta-learner; and training-fold feature selection and hyperparameter search. Autoencoder_ANN uses training-fold-only representation learning and target scaling.
 
 ## Evaluation and interpretation
@@ -53,6 +55,16 @@ READI-Stack uses Ridge, RBF-SVR, gradient boosting, and Bayesian Ridge base esti
 Outputs include MAE, RMSE, R², MAPE, nominal adjusted R², and the percentage complement of MAPE. `Adjusted_R2_nominal` uses the raw input count and is not an effective-complexity correction for nonlinear estimators. `MAPE_complement_percent` is `100 × (1 − MAPE)` and is not classification accuracy.
 
 For each four-readiness EBM function, a threshold is defined by the largest positive change between adjacent fitted contribution scores. A saturation point is the first strictly post-threshold point satisfying the specified low-change criterion over three successive intervals. Zero-crossings are calculated separately. These are descriptive properties of the fitted functions; their values can depend on the dataset, model settings, and binning. Pairwise importance indicates interaction magnitude; signed surfaces provide additional detail about conditional patterns. These fitted associations alone do not establish causal effects.
+
+## Stability analysis
+
+A nonparametric bootstrap assesses how consistently the OR-EBM interpretation reproduces under resampling:
+
+```bash
+python stability_bootstrap.py --data data/Readiness.csv --out outputs --reps 500
+```
+
+For each of the `--reps` bootstrap resamples (drawn with replacement) the readiness-only OR-EBM is refitted with the identical configuration (`interactions=6`, `random_state=42`) and the feature/interaction importance, contribution curves and threshold/saturation estimates are re-extracted. Outputs include `bootstrap_importance_summary.csv` (means, SDs and 95% percentile intervals), `bootstrap_threshold_saturation.csv`, `bootstrap_ranking_summary.json` (ranking-reproduction frequencies and the Organisation-vs-Technology separation), variance inflation factors, and `bootstrap_results.pkl`.
 
 ## Output files
 

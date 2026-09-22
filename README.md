@@ -58,13 +58,13 @@ For each four-readiness EBM function, a threshold is defined by the largest posi
 
 ## Stability analysis
 
-A nonparametric bootstrap assesses how consistently the OR-EBM interpretation reproduces under resampling:
+A nonparametric bootstrap assesses how consistently the OR-EBM is recovered under resampling:
 
 ```bash
 python stability_bootstrap.py --data data/Readiness.csv --out outputs --reps 500
 ```
 
-For each of the `--reps` bootstrap resamples (drawn with replacement) the readiness-only OR-EBM is refitted with the identical configuration (`interactions=6`, `random_state=42`) and the feature/interaction importance, contribution curves and threshold/saturation estimates are re-extracted. Outputs include `bootstrap_importance_summary.csv` (means, SDs and 95% percentile intervals), `bootstrap_threshold_saturation.csv`, `bootstrap_ranking_summary.json` (ranking-reproduction frequencies and the Organisation-vs-Technology separation), variance inflation factors, and `bootstrap_results.pkl`.
+For each of the `--reps` bootstrap resamples (drawn with replacement) the readiness-only OR-EBM is refitted with the identical configuration (`interactions=6`, `random_state=42`) and the feature/interaction importance, contribution curves and threshold/saturation estimates are re-extracted. Outputs include `bootstrap_importance_summary.csv` (means, SDs and 95% percentile intervals), `bootstrap_threshold_saturation.csv`, `bootstrap_ranking_summary.json` (ranking-recovery frequencies and the Organisation-vs-Technology separation), variance inflation factors, and `bootstrap_results.pkl`.
 
 ## Diagnostics: density check and saturation-cutoff sensitivity
 

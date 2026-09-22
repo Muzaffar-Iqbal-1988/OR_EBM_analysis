@@ -8,7 +8,7 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 from scipy.stats import gaussian_kde
 
-import OR_EBM_complete_analysis as core  # reuse the study's own functions
+import OR_EBM_complete_analysis as core 
 
 MAIN, TARGET, SEED = core.MAIN, core.TARGET, core.SEED
 SHORT = {MAIN[0]: "Facility", MAIN[1]: "People",

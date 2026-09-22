@@ -3,7 +3,7 @@ import argparse, pickle
 from pathlib import Path
 import numpy as np, pandas as pd
 
-import OR_EBM_complete_analysis as core  # reuse the study's own functions
+import OR_EBM_complete_analysis as core  
 
 MAIN, TARGET, SEED = core.MAIN, core.TARGET, core.SEED
 

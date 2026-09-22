@@ -1,17 +1,3 @@
-"""OR-EBM stability / robustness analysis (nonparametric bootstrap).
-
-Resamples the analytical dataset with replacement B times, refits the
-readiness-only OR-EBM with the exact published configuration, and summarises the
-stability of feature/interaction importance, nonlinear contribution curves and
-threshold/saturation estimates. Also reports variance inflation factors and the
-robustness of the Technology vs Organisation importance separation.
-
-Usage:
-    python stability_bootstrap.py --data data/Readiness.csv --out outputs --reps 500
-
-The four readiness scores are the model inputs; interpretation follows the same
-settings as OR_EBM_complete_analysis.py (interactions=6, random_state=42).
-"""
 from __future__ import annotations
 import argparse, pickle
 from pathlib import Path

@@ -66,6 +66,16 @@ python stability_bootstrap.py --data data/Readiness.csv --out outputs --reps 500
 
 For each of the `--reps` bootstrap resamples (drawn with replacement) the readiness-only OR-EBM is refitted with the identical configuration (`interactions=6`, `random_state=42`) and the feature/interaction importance, contribution curves and threshold/saturation estimates are re-extracted. Outputs include `bootstrap_importance_summary.csv` (means, SDs and 95% percentile intervals), `bootstrap_threshold_saturation.csv`, `bootstrap_ranking_summary.json` (ranking-reproduction frequencies and the Organisation-vs-Technology separation), variance inflation factors, and `bootstrap_results.pkl`.
 
+## Diagnostics: density check and saturation-cutoff sensitivity
+
+Two reviewer diagnostics reuse the fitted interpretation OR-EBM:
+
+```bash
+python density_and_sensitivity.py --data data/Readiness.csv --out outputs
+```
+
+This re-applies the saturation rule to the fitted contribution curves at cut-offs of 0.05, 0.10 and 0.15 (the threshold rule is unchanged), and examines the distribution of each of the four factor scores, locating the OR-EBM threshold and saturation points within each distribution and counting the surrounding observations. Outputs include `tables/table_sensitivity_saturation_cutoffs.csv`, `tables/factor_score_density_support.csv`, and `figures/factor_score_density_check.png`.
+
 ## Output files
 
 `outputs/tables/` contains data-quality summaries, variable statistics, correlation values, partition membership, fold metrics, cross-validation and holdout comparisons, feature and interaction importance, threshold calculations, prediction tables, and runtime environment information.
